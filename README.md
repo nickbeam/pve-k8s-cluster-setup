@@ -1,3 +1,4 @@
+![Proxmox and K8s cluster](img/pve+k8s.png)
 # Complete Guide to Kubernetes Cluster Setup at Proxmox 8.3 on Ubuntu 22.04 LTS: A Step-by-Step Tutorial for DevOps.
 ![Proxmox and K8s cluster](img/pve+k8s.png)
 # 1. Deploying a Kubernetes master node
