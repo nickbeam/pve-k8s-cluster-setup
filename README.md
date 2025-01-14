@@ -122,8 +122,8 @@ sudo systemctl enable containerd
 ````
 
 ### Install Kubernetes Components:
-Add the Kubernetes signing key and repository:
 ````shell
+# Add the Kubernetes signing key and repository:
 sudo apt-get update
 # apt-transport-https may be a dummy package; if so, you can skip that package
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
@@ -240,8 +240,9 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ````
 
-Deploy a Pod Network: Install a pod network so that your nodes can communicate with each other:
+Deploy a Pod Network:
 ````shell
+# Install a pod network so that your nodes can communicate with each other:
 sudo kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml
 ````
 
@@ -262,9 +263,12 @@ sudo rm /etc/machine-id
 sudo systemd-machine-id-setup
 sudo reboot
 
-# Configure network if necessary, example above
+# Configure network if necessary, example at 1.2
+````
 
-# Join the Worker Nodes to Master-node:
+## Join the Worker Nodes to Master-node:
+````shell
+# Run at worker nodes console:
 kubeadm join 10.10.0.41:6443 --token zaahyi.sqtus5x715ovb1tz \
         --discovery-token-ca-cert-hash sha256:8b559269db6d4ea4051c2989d8860486d10bfa709d44eba8d91fd57a7a633ae7
 ````
@@ -290,8 +294,7 @@ You’ve successfully set up a Kubernetes cluster on Ubuntu 22.04 LTS. This basi
 ## Links of used documentation:
 1. [Setting up a Kubernetes cluster on virtual machines in a Proxmox VE 7.2 environment](https://ex-minds.ru/kubernetes-proxmox-install/)
 2. [Complete Guide to Kubernetes Cluster Setup on Ubuntu 22.04 LTS : A Step-by-Step Tutorial for DevOps](https://medium.com/@kvihanga/how-to-set-up-a-kubernetes-cluster-on-ubuntu-22-04-lts-433548d9a7d0)
-3. [Proxmox Virtual Environment](https://www.proxmox.com/en/produc0ts/proxmox-virtual-environment/overview)
-4. [Proxmox wiki](https://pve.proxmox.com/wiki/Main_Page)
-5. [Ubuntu Cloud Images](https://cloud-images.ubuntu.com/)
-6. [How do I set a password on an Ubuntu cloud image?](https://serverfault.com/questions/920117/how-do-i-set-a-password-on-an-ubuntu-cloud-image)
-7. [Netplan static IP on Ubuntu configuration](https://linuxconfig.org/how-to-configure-static-ip-address-on-ubuntu-18-04-bionic-beaver-linux)
+3. [Proxmox wiki](https://pve.proxmox.com/wiki/Main_Page)
+4. [Ubuntu Cloud Images](https://cloud-images.ubuntu.com/)
+5. [How do I set a password on an Ubuntu cloud image?](https://serverfault.com/questions/920117/how-do-i-set-a-password-on-an-ubuntu-cloud-image)
+6. [Netplan static IP on Ubuntu configuration](https://linuxconfig.org/how-to-configure-static-ip-address-on-ubuntu-18-04-bionic-beaver-linux)
