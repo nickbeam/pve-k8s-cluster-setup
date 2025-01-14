@@ -1,5 +1,5 @@
 # Complete Guide to Kubernetes Cluster Setup at Proxmox 8.3 on Ubuntu 22.04 LTS: A Step-by-Step Tutorial for DevOps.
-
+![Proxmox and K8s cluster](img/pve+k8s.png)
 # 1. Deploying a Kubernetes master node
 The master node itself is not much different from workers during the installation process, so after the initial installation of all the necessary packages, it can be used as a template for worker nodes.
 This article will not describe how to work with `Proxmox (PVE)`, it is assumed that you already have experience with this product
@@ -35,20 +35,20 @@ qm template 9000
 ````
 
 ## 1.2 Creating a template for a Kubernetes node
-#### Now create the first VM, which will have everything necessary to deploy a Kebernetes node, which we will then also convert into a template:
+##### Now create the first VM, which will have everything necessary to deploy a Kebernetes node, which we will then also convert into a template:
 ````shell
 qm clone 9000 9001 --name k8s-template --full --storage local-lvm
 qm set 9001 --memory 4096 --agent enabled=1
 qm resize 9001 scsi0 3G
 ````
 
-#### Launch the cloned machine `9001`, configure the network and install everything necessary, namely docker and kubernetes.
+##### Launch the cloned machine `9001`, configure the network and install everything necessary, namely docker and kubernetes.
 ````shell
 # Add new user if necessary and add to sudoers
 adduser kuser
 usermod -aG sudo kuser
 ````
-#### Network setup (the name of the yaml file may differ, set the settings relevant to your network):
+##### Network setup (the name of the yaml file may differ, set the settings relevant to your network):
 ````shell
 nano /etc/netplan/50-cloudinit-netcfg.yaml
 ````
@@ -103,7 +103,7 @@ EOF
 sudo sysctl --system
 ````
 
-#### Install Containerd Runtime:
+##### Install Containerd Runtime:
 ````shell
 sudo apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates
 
@@ -120,7 +120,7 @@ sudo systemctl restart containerd
 sudo systemctl enable containerd
 ````
 
-#### Install Kubernetes Components:
+##### Install Kubernetes Components:
 ````shell
 # Add the Kubernetes signing key and repository:
 sudo apt-get update
@@ -141,7 +141,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo systemctl enable kubelet.service
 ````
 
-#### Back to PVE console and create template:
+##### Back to PVE console and create template:
 ````shell
 qm template 9001
 ````
@@ -232,14 +232,14 @@ kubeadm join 10.10.0.41:6443 --token zaahyi.sqtus5x715ovb1tz \
         --discovery-token-ca-cert-hash sha256:8b559269db6d4ea4051c2989d8860486d10bfa709d44eba8d91fd57a7a633ae7
 ````
 
-#### To start using your cluster, set up the kubeconfig:
+##### To start using your cluster, set up the kubeconfig:
 ````shell
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ````
 
-#### Deploy a Pod Network:
+##### Deploy a Pod Network:
 ````shell
 # Install a pod network so that your nodes can communicate with each other:
 sudo kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml
@@ -265,14 +265,14 @@ sudo reboot
 # Configure network if necessary, example at 1.2
 ````
 
-#### Join the Worker Nodes to Master-node:
+##### Join the Worker Nodes to Master-node:
 ````shell
 # Run at worker nodes console:
 kubeadm join 10.10.0.41:6443 --token zaahyi.sqtus5x715ovb1tz \
         --discovery-token-ca-cert-hash sha256:8b559269db6d4ea4051c2989d8860486d10bfa709d44eba8d91fd57a7a633ae7
 ````
 
-#### Verifying the Cluster Setup
+####    # Verifying the Cluster Setup
 ````shell
 # Ensure your cluster is up and running (At node with control-plane = master node):
 kubectl get nodes
