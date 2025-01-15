@@ -272,7 +272,7 @@ kubeadm join 10.10.0.41:6443 --token zaahyi.sqtus5x715ovb1tz \
         --discovery-token-ca-cert-hash sha256:8b559269db6d4ea4051c2989d8860486d10bfa709d44eba8d91fd57a7a633ae7
 ````
 
-####    # Verifying the Cluster Setup
+#### Verifying the Cluster Setup:
 ````shell
 # Ensure your cluster is up and running (At node with control-plane = master node):
 kubectl get nodes
@@ -290,7 +290,7 @@ k8s-worker-3   Ready    <none>          2m10s   v1.29.0
 ## Conclusion
 You’ve successfully set up a Kubernetes cluster at Proxmox 8.3 on Ubuntu 22.04 LTS. This basic cluster is ready for deploying applications and further exploration of Kubernetes’ capabilities.
 
-## Links of used documentation:
+## Links to articles and documentation:
 1. [Setting up a Kubernetes cluster on virtual machines in a Proxmox VE 7.2 environment](https://ex-minds.ru/kubernetes-proxmox-install/)
 2. [Complete Guide to Kubernetes Cluster Setup on Ubuntu 22.04 LTS : A Step-by-Step Tutorial for DevOps](https://medium.com/@kvihanga/how-to-set-up-a-kubernetes-cluster-on-ubuntu-22-04-lts-433548d9a7d0)
 3. [Proxmox wiki](https://pve.proxmox.com/wiki/Main_Page)
